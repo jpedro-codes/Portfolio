@@ -11,6 +11,11 @@ body {
   background-size: 200% 200%;
   animation: gradientShift 10s ease infinite;
   color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
   padding: 20px 0; /* Adiciona espaço no topo e na base */
 }
 
@@ -24,6 +29,7 @@ body {
 /* Container */
 #container {
   width: 90%;
+  max-width: 400px;
   max-width: 680px; /* Aumenta a largura máxima */
   background: rgba(255, 255, 255, 0.06);
   border-radius: 22px;
@@ -31,6 +37,9 @@ body {
   padding: 25px;
   backdrop-filter: blur(10px);
   box-shadow: 0 0 25px rgba(122, 0, 255, 0.5);
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeUp 1.5s ease forwards;
   margin: 0 auto; /* Centraliza o container na página */
 }
 
@@ -42,6 +51,8 @@ body {
   object-fit: cover;
   border: 3px solid #a855ff;
   box-shadow: 0 0 25px rgba(168, 85, 255, 0.7);
+  animation: pulseGlow 3s ease-in-out infinite alternate;
+  transition: 0.4s;
 }
 
 #styleimg:hover {
@@ -50,18 +61,27 @@ body {
 }
 
 /* Títulos */
+h1 {
+  font-size: 1.2rem;
 h1, #profile p {
   font-size: 1.5rem;
   margin-top: 10px;
   color: #ddd;
+  opacity: 0;
+  animation: fadeUp 1.6s ease forwards;
+  animation-delay: 0.3s;
 }
 
 h2 {
   font-size: 1rem;
   font-weight: 400;
+  margin-bottom: 25px;
   margin-top: 5px;
   margin-bottom: 30px;
   color: #bdbdbd;
+  opacity: 0;
+  animation: fadeUp 1.6s ease forwards;
+  animation-delay: 0.5s;
 }
 
 /* Animação base */
@@ -76,6 +96,9 @@ h2 {
   to { box-shadow: 0 0 35px rgba(168, 85, 255, 1); }
 }
 
+/* Lista de links */
+ul {
+  list-style: none;
 /* Seções de Conteúdo */
 .content-section {
   margin-top: 40px;
@@ -101,12 +124,19 @@ h2 {
 /* Seção de Habilidades */
 .skills-list {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
+  opacity: 0;
+  animation: fadeUp 1.6s ease forwards;
+  animation-delay: 0.8s;
 }
 
-.skill-item span {
+/* Botões */
+ul li a {
+  display: block;
+.skills-list span {
   background: rgba(122, 0, 255, 0.2);
   border: 1px solid #a855ff;
   padding: 8px 16px;
@@ -115,14 +145,9 @@ h2 {
   transition: 0.3s ease;
 }
 
-.skill-item span:hover {
+.skills-list span:hover {
   background: #7a00ff;
   transform: translateY(-3px);
-}
-
-.skill-item img {
-  width: 40px; /* Tamanho do ícone */
-  height: 40px;
 }
 
 /* Seção de Projetos */
@@ -154,15 +179,31 @@ h2 {
   padding: 8px 18px;
   border-radius: 8px;
   text-decoration: none;
+  padding: 14px;
+  border-radius: 14px;
   font-weight: 500;
+  position: relative;
+  overflow: hidden;
   transition: 0.3s ease;
 }
 
+/* Efeito de brilho passando */
+ul li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transition: 0.5s;
 .project-card a:hover {
   background: #a855ff;
   box-shadow: 0 0 15px rgba(168, 85, 255, 0.7);
 }
 
+ul li a:hover::before {
+  left: 100%;
 /* Rodapé com links sociais */
 footer {
   margin-top: 40px;
@@ -173,6 +214,10 @@ footer {
   gap: 25px;
 }
 
+ul li a:hover {
+  background: #7a00ff;
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(122, 0, 255, 0.9);
 footer a {
   color: #ccc;
   text-decoration: none;
@@ -200,4 +245,12 @@ footer a:hover {
     font-size: 1rem;
   }
 
+  h2 {
+    font-size: 0.9rem;
+  }
+
+  ul li a {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 }
